@@ -13,4 +13,4 @@
 
 Route::resource('posts', 'PostsController');
 Route::resource('user', 'UserController');
-
+Route::resource('employees', 'EmployeesController');

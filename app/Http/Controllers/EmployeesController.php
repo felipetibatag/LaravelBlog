@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Post;
+use App\Employee;
 
-class PostsController extends Controller
+class EmployeesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::onlyTrashed()->get();
-        return view("Posts.index", compact('posts'));
-
+        $employee = Employee::find(1)->with('address')->get();
+        return $employee;
     }
 
     /**
@@ -28,7 +26,6 @@ class PostsController extends Controller
     public function create()
     {
         //
-        return view("posts.create");
     }
 
     /**
@@ -40,8 +37,6 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //
-        Post::create($request->all());
-        return redirect()->route('posts.index')->with('status', 'Se agrego correctamente');
     }
 
     /**
@@ -63,8 +58,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post'));
+        //
     }
 
     /**
@@ -76,8 +70,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Post::findOrFail($id)->update($request->all());
-        return redirect()->route('posts.index')->with('status', 'Post Actualizado');
+        //
     }
 
     /**
@@ -88,7 +81,6 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        Post::findOrFail($id)->delete();
-        return back()->with('status', 'Post #' . $id . ' Eliminado');
+        //
     }
 }
