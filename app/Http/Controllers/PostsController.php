@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -14,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = DB::table('posts')->get();// devuelve todos los datos en forma de colección
+        $posts = Post::all();
         return view("Posts.index", compact('posts'));
 
     }
@@ -39,14 +40,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //
-        DB::table('posts')->insert([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'author' => $request->input('author'),
-            'updated_at' => now(),
-            'created_at' => now()
-
-        ]);
+        Post::create($request->all());
         return redirect()->route('posts.index')->with('status', 'Se agrego correctamente');
     }
 
@@ -69,7 +63,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = DB::table('posts')->where('id', $id)->first();
+        $post = Post::findOrFail($id);
         return view('posts.edit', compact('post'));
     }
 
@@ -82,7 +76,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('posts')->where('id', $id)->update($request->only(['name', 'description', 'author']));
+        Post::findOrFail($id)->update($request->all());
         return redirect()->route('posts.index')->with('status', 'Post Actualizado');
     }
 
@@ -94,7 +88,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('posts')->where('id', $id)->delete();
+        Post::findOrFail($id)->delete();
         return back()->with('status', 'Post #' . $id . ' Eliminado');
     }
 }
