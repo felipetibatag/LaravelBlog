@@ -13,7 +13,7 @@
 </head>
 <body>
     @include('includes.nav')
-    <div class="d-flex justify-content-center" style="height:90vh">
+    <div class="d-flex border border-info" style="height:90vh" >
     @yield("content")
     </div>
 </body>

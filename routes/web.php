@@ -14,3 +14,6 @@
 Route::resource('posts', 'PostsController');
 Route::resource('users', 'UserController');
 Route::resource('employees', 'EmployeesController');
+Route::get('admin', 'AdminController@index');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login');

@@ -16,8 +16,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        $posts = User::findOrFail(1)->with('posts')->first();
-        return $posts;
+        $posts = User::findOrFail(1)->with(['posts'])->get();
+        return "." . $posts;
 
 
     }
