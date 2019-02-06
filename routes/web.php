@@ -12,5 +12,10 @@
  */
 
 Route::resource('posts', 'PostsController');
-Route::resource('user', 'UserController');
-
+Route::resource('users', 'UserController');
+Route::resource('employees', 'EmployeesController');
+Route::get('admin', 'AdminController@index');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register')->name('register');

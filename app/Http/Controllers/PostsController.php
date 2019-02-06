@@ -15,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::onlyTrashed()->get();
         return view("Posts.index", compact('posts'));
 
     }

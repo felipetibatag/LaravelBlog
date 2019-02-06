@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Employee;
 
-
-class UserController extends Controller
+class EmployeesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        $posts = User::findOrFail(1)->with(['posts'])->get();
-        return "." . $posts;
-
-
+        $employee = Employee::find(1)->with('address')->get();
+        return $employee;
     }
 
     /**
